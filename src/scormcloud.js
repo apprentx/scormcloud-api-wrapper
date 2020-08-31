@@ -221,17 +221,12 @@ SCORMCloud.prototype.getCourseDetail = function (courseid, callback) {
     });
 }
 
-SCORMCloud.prototype.importCourse = function (courseid, path, callback) {
+SCORMCloud.prototype.importCourse = function (courseid, path, formData, callback) {
 
     var url = new URL('api?method=rustici.course.importCourse', this.serviceUrl);
 
     // The id used to identify this course.
     if (courseid) url.searchParams.set('courseid', courseid);
-
-    // See https://cloud.scorm.com/docs/api_reference/course.html#importcourse
-    let formData = {
-        filedata: fs.createReadStream(path)
-    }
 
     this._request(url, { formData: formData }, function (error, json) {
 
